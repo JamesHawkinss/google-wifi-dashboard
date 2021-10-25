@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/google-wifi-dashboard/'
+    publicPath: '/'
 }
