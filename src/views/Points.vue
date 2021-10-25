@@ -1,8 +1,7 @@
 <template>
   <div class="network">
     <navigation to="/" text="GO HOME" />
-    <network-card />
-    <realtime-usage />
+    <points-card />
   </div>
 </template>
 
@@ -13,9 +12,8 @@
 </style>
 
 <script>
-import NetworkCard from "@/components/core/NetworkCard.vue";
+import PointsCard from "@/components/core/PointsCard.vue";
 import Navigation from '../components/core/Navigation.vue';
-import RealtimeUsage from '../components/core/RealtimeUsage.vue';
 
 export default {
   data() {
@@ -27,11 +25,8 @@ export default {
     };
   },
   components: {
-    NetworkCard,
-    Navigation,
-    RealtimeUsage
+    PointsCard,
+    Navigation
   },
 };
 </script>
-    De,
-    RealtimeUsagevicesCard

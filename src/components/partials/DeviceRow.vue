@@ -1,7 +1,8 @@
 <template>
     <div class="deviceRow">
-        <p class="title">{{ friendlyName }}</p>
-        <p class="subtitle">{{ friendlyType }}</p>
+        <p class="title">{{ device.friendlyName }}</p>
+        <p class="subtitle">{{ device.friendlyType }}</p>
+        <p>{{ traffic }}</p>
     </div>
 </template>
 
@@ -27,12 +28,29 @@
 
 <script>
 export default {
+    data() {
+        return {
+            traffic: {}
+        }
+    },
     props: {
-        friendlyName: {
-            type: String
-        },
-        friendlyType: {
-            type: String
+        device: {
+            type: Object
+        }
+    },
+    watch: {
+        "$store.state.realtimeMetrics"(newValue) {
+            this.getTraffic()
+        }
+    },
+    methods: {
+        getTraffic() {
+            if (!this.device.connected) return this.traffic = 'disconnected'; 
+
+            const find = this.$store.state.realtimeMetrics?.stationMetrics.find((i) => i.station.id === this.device.id);
+            if (find && find.traffic) {
+                this.traffic = find.traffic;
+            }
         }
     }
 }

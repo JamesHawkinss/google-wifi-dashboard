@@ -1,7 +1,7 @@
 <template>
-    <div class="nav" @click="$router.push('/')">
+    <div class="nav" @click="$router.push(to)">
         <font-awesome-icon icon="arrow-left" class="icon" />
-        <p>GO HOME</p>
+        <p>{{ text }}</p>
     </div>
 </template>
 
@@ -26,20 +26,17 @@
     padding-left: 1rem;
     margin-right: .75rem;
 }
-
-p.action {
-    color: #84b2ef;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.title {
-    
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
 </style>
+
+<script>
+export default {
+    props: {
+        to: {
+            type: String
+        },
+        text: {
+            type: String
+        }
+    }
+}
+</script>

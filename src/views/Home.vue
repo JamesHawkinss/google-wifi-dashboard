@@ -7,22 +7,27 @@
     </p>
 
     <div class="overviewBubbles">
-      <icon-bubble text="Internet" icon="globe" />
+      <icon-bubble
+        text="Internet"
+        icon="globe"
+        :onClick="() => $router.push('/network')"
+      />
       <icon-bubble
         :text="`Wifi devices (${$store.state.wifiDevices.length})`"
         icon="network-wired"
+        :onClick="() => $router.push('/points')"
       />
       <icon-bubble
         :text="`Devices (${
           $store.state.devices.filter((d) => d.connected).length
         })`"
         icon="laptop"
+        :onClick="() => $router.push('/devices')"
       />
     </div>
 
     <network-card />
     <devices-card />
-    <!-- <p>{{ $store.state.devices }}</p> -->
   </div>
 </template>
 
@@ -52,7 +57,7 @@ p {
 <script>
 import IconBubble from "@/components/core/IconBubble.vue";
 import NetworkCard from "@/components/core/NetworkCard.vue";
-import DevicesCard from '../components/core/DevicesCard.vue';
+import DevicesCard from "../components/core/DevicesCard.vue";
 
 export default {
   data() {
@@ -64,12 +69,12 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch('updateData');
+    this.$store.dispatch("updateData");
   },
   components: {
     IconBubble,
     NetworkCard,
-    DevicesCard
+    DevicesCard,
   },
 };
 </script>

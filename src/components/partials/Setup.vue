@@ -35,7 +35,8 @@ export default {
         await this.$store.dispatch('setGroup');
         await Promise.all([
           this.$store.dispatch('setDevices'),
-          this.$store.dispatch('getSpeedTestResults')
+          this.$store.dispatch('getSpeedTestResults'),
+          this.$store.dispatch('startRealtimeMetrics')
         ]);
       } catch (e) {
         this.status = { state: "error", message: e.message };

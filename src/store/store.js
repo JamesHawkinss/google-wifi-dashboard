@@ -10,6 +10,7 @@ export function createStore() {
             wifiDevices: [],
             devices: [],
             speedTestResults: {},
+            realtimeMetrics: {},
             privateSsid: 'loading'
         },
         mutations: {
@@ -33,14 +34,17 @@ export function createStore() {
             },
             setSpeedTestResults(state, payload) {
                 state.speedTestResults = payload
+            },
+            setRealtimeMetrics(state, payload) {
+                state.realtimeMetrics = payload
             }
         },
         actions: {
             async updateData(context) {
-                console.log('updating');
                 await context.dispatch('setGroup');
                 await Promise.all([
                     context.dispatch('setDevices'),
+                    context.dispatch('setRealtimeMetrics'),
                     context.dispatch('getSpeedTestResults')
                 ]);
             },
@@ -54,12 +58,20 @@ export function createStore() {
             },
             async setDevices(context) {
                 const devices = (await getGoogleWifiApi().getGroupDevices(context.state.group.id)).stations;
-                console.log(devices);
                 context.commit('setDevices', devices);
             },
             async getSpeedTestResults(context) {
                 const results = (await getGoogleWifiApi().getGroupSpeedTestResults(context.state.group.id)).speedTestResults[0];
                 context.commit('setSpeedTestResults', results);
+            },
+            async setRealtimeMetrics(context) {
+                const metrics = (await getGoogleWifiApi().getGroupRealtimeMetrics(context.state.group.id));
+                context.commit('setRealtimeMetrics', metrics);
+            },
+            async startRealtimeMetrics(context) {
+                setInterval(async () => {
+                    await context.dispatch('setRealtimeMetrics');
+                }, 5000)
             }
         }
     })

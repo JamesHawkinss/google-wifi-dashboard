@@ -1,5 +1,5 @@
 <template>
-    <div class="iconBubble">
+    <div class="iconBubble" @click="onClick()">
         <div class="bubble">
             <font-awesome-icon :icon="icon" />
         </div>
@@ -35,6 +35,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
 }
 
 .text {
@@ -57,6 +59,9 @@ export default {
         },
         statusColor: {
             type: String
+        },
+        onClick: {
+            type: Function
         }
     }
 }
