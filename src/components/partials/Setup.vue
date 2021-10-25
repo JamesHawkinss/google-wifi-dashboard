@@ -31,8 +31,12 @@ export default {
         if (!res) return;
 
         this.$store.commit('setLoggedIn', true);
+        this.$store.commit('setRefreshToken', this.refreshToken);
         await this.$store.dispatch('setGroup');
-        await this.$store.dispatch('setDevices');
+        await Promise.all([
+          this.$store.dispatch('setDevices'),
+          this.$store.dispatch('getSpeedTestResults')
+        ]);
       } catch (e) {
         this.status = { state: "error", message: e.message };
       }

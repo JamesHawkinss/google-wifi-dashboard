@@ -2,16 +2,27 @@
   <div class="home">
     <p v-if="status.state">{{ `${status.state}: ${status.message}` }}</p>
     <h1 v-text="$store.state.privateSsid" />
-    <p>Here's an insightful comment into the overall performance of your network!</p>
+    <p>
+      Here's an insightful comment into the overall performance of your network!
+    </p>
+
     <div class="overviewBubbles">
       <icon-bubble text="Internet" icon="globe" />
       <icon-bubble
-        :text="`Wifi devices (${$store.state.wifiDevices.length })`"
+        :text="`Wifi devices (${$store.state.wifiDevices.length})`"
         icon="network-wired"
       />
-      <icon-bubble :text="`Devices (${ $store.state.devices.filter((d) => d.connected).length })`" icon="laptop" />
+      <icon-bubble
+        :text="`Devices (${
+          $store.state.devices.filter((d) => d.connected).length
+        })`"
+        icon="laptop"
+      />
     </div>
-    <p>{{ $store.state.devices }}</p>
+
+    <network-card />
+    <devices-card />
+    <!-- <p>{{ $store.state.devices }}</p> -->
   </div>
 </template>
 
@@ -28,6 +39,8 @@
 
   max-width: 45rem;
   margin: 0 auto;
+
+  padding-bottom: 2rem;
 }
 
 p {
@@ -37,7 +50,9 @@ p {
 </style>
 
 <script>
-import IconBubble from "@/components/core/IconBubble.vue"
+import IconBubble from "@/components/core/IconBubble.vue";
+import NetworkCard from "@/components/core/NetworkCard.vue";
+import DevicesCard from '../components/core/DevicesCard.vue';
 
 export default {
   data() {
@@ -45,11 +60,17 @@ export default {
       status: {
         state: "",
         message: "",
-      }
+      },
     };
   },
+  mounted() {
+    this.$store.dispatch('updateData');
+  },
   components: {
-    IconBubble
-  }
+    IconBubble,
+    NetworkCard,
+    DevicesCard
+  },
 };
 </script>
+    DevicesCard

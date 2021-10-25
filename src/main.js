@@ -4,18 +4,21 @@ import App from '@/App.vue'
 import VueRouter from 'vue-router'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faGlobe, faNetworkWired, faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faNetworkWired, faLaptop, faWifi, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import { createStore } from '@/store/store'
 
 import Home from '@/views/Home.vue'
+import Network from '@/views/Network.vue'
 import NotFound from '@/views/NotFound.vue'
 
 library.add([
   faGlobe,
   faNetworkWired,
-  faLaptop
+  faLaptop,
+  faWifi,
+  faArrowLeft
 ])
 
 Vue.use(Vuex)
@@ -25,9 +28,10 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes: [
       { path: '/', component: Home },
+      { path: '/network', component: Network },
       { path: '*', component: NotFound }
   ]
 });
