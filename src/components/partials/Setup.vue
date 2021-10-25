@@ -26,12 +26,13 @@ export default {
   methods: {
     async setup() {
       try {
-        this.status = { state: "loading", message: "setting up" };
-
         const res = await setupGoogleWifiApi(this.refreshToken);
 
-        if (res) this.$store.commit('setLoggedIn', true);
-        this.status = { state: "", message: "" };
+        if (!res) return;
+
+        this.$store.commit('setLoggedIn', true);
+        await this.$store.dispatch('setGroup');
+        await this.$store.dispatch('setDevices');
       } catch (e) {
         this.status = { state: "error", message: e.message };
       }

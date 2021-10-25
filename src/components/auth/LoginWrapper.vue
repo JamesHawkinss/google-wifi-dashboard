@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { getGoogleWifiApi } from '@/lib/googleWifiApi.js'
 import Setup from '@/components/partials/Setup.vue'
 import { mapGetters } from 'vuex'
 

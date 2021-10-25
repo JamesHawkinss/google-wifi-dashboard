@@ -3,14 +3,24 @@ import Vuex from 'vuex'
 import App from '@/App.vue'
 import VueRouter from 'vue-router'
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faGlobe, faNetworkWired, faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 import { createStore } from '@/store/store'
 
 import Home from '@/views/Home.vue'
-import Groups from '@/views/Groups.vue'
 import NotFound from '@/views/NotFound.vue'
 
-Vue.use(VueRouter)
+library.add([
+  faGlobe,
+  faNetworkWired,
+  faLaptop
+])
+
 Vue.use(Vuex)
+Vue.use(VueRouter)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
@@ -18,7 +28,6 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
       { path: '/', component: Home },
-      { path: '/groups', component: Groups },
       { path: '*', component: NotFound }
   ]
 });
