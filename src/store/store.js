@@ -71,7 +71,7 @@ export function createStore() {
             async startRealtimeMetrics(context) {
                 setInterval(async () => {
                     await context.dispatch('setRealtimeMetrics');
-                }, 5000)
+                }, 2500)
             }
         }
     })

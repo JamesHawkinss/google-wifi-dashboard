@@ -76,7 +76,6 @@
 export default {
   data() {
     return {
-      interval: null,
       intervalUpdate: null,
       chartOptions: {
         chart: {
@@ -89,7 +88,7 @@ export default {
           },
           animations: {
             enabled: true,
-            easing: "linear",
+            easing: 'linear',
             dynamicAnimation: {
               speed: 1000
             }
@@ -126,6 +125,15 @@ export default {
         { name: "receiveSpeedBps", data: [] },
       ],
     };
+  },
+  mounted() {
+    this.intervalUpdate = setInterval(async () => {
+      this.updateChart()
+    }, 1000)
+  },
+  beforeDestroy() {
+    if (this.intervalUpdate)
+      clearInterval(this.intervalUpdate)
   },
   computed: {
     realtimeData() {
