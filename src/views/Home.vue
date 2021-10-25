@@ -1,25 +1,51 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p v-if="status.state">{{ `${status.state}: ${status.message}` }}</p>
+    {{ groupIds }}
+    {{ groupStatus }}
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
-// import GoogleWifiApi from 'google-wifi-api-node'
-const GoogleWifiApi = import('google-wifi-api-node')
+import { getGoogleWifiApi } from "@/lib/googleWifiApi.js";
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      status: {
+        state: "",
+        message: "",
+      },
+      groups: {},
+      groupIds: [],
+      groupStatus: {}
+    };
+  },
+  async mounted() {
+    this.status = { state: "loading", message: "loading group information" };
+    await this.getGroupIds();
+    await this.getStatus(this.groupIds[0]);
+    this.status = { state: "", message: "" };
   },
   methods: {
-    async setup(refreshToken) {
-      const googleWifiApi = new GoogleWifiApi(refreshToken)
-      await googleWifiApi.init()
-    }
-  }
-}
+    getGoogleWifiApi() {
+      return getGoogleWifiApi();
+    },
+    async getGroupIds() {
+      try {
+        const groups = await getGoogleWifiApi().getGroups();
+        groups.groups.forEach((grp) => this.groupIds.push(grp.id));
+      } catch (e) {
+        this.status = { state: 'error', message: e.message };
+      }
+    },
+    async getStatus(groupId) {
+      try {
+        this.groupStatus = await getGoogleWifiApi().getGroupStatus(groupId);
+      } catch (e) {
+        this.status = { state: 'error', message: e.message };
+      }
+    },
+  },
+};
 </script>

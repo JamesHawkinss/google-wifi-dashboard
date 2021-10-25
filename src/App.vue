@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Header />
+    <login-wrapper>
+      <router-view/>
+    </login-wrapper>
   </div>
 </template>
+
+<script>
+import Header from '@/components/partials/Header.vue'
+import LoginWrapper from '@/components/core/LoginWrapper.vue'
+
+export default {
+  components: {
+    Header,
+    LoginWrapper
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -15,18 +27,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
