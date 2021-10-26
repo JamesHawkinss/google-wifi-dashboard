@@ -22,6 +22,10 @@
     cursor: pointer;
 }
 
+.nav:hover .icon {
+    transform: translateX(-.3rem);
+}
+
 .icon {
     padding-left: 1rem;
     margin-right: .75rem;

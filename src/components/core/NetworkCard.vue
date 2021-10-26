@@ -10,7 +10,7 @@
                 <speed-test-result backgroundColor="#493955" :speed="($store.state.speedTestResults.transmitWanSpeedBps / 1000 / 1000).toPrecision(3)" subtext="Mbps upload" />
             </div>
             <p>Your last speed test was on {{ new Date($store.state.speedTestResults.timestamp).toDateString() }}</p>
-            <p class="action" @click="runSpeedTest()">Run speed test</p>
+            <!-- <p class="action" @click="runSpeedTest()">Run speed test</p> -->
         </div>
     </div>
 </template>
@@ -63,8 +63,13 @@ export default {
         SpeedTestResult
     },
     methods: {
-        runSpeedTest() {
-            console.log('gotta get an ap id first')
+        async runSpeedTest() {
+            const apId = this.$store.state.realtimeMetrics.meshMetrics[0].apId
+            
+            if (apId) {
+                const res = await getGoogleWifiApi().requestAccessPointLocalSpeedTest(apId);
+                console.log(res);
+            }
         }
     }
 }

@@ -2,23 +2,13 @@
   <div class="card">
     <div class="content">
       <h2>Network speed and usage</h2>
-      <p>
-        {{
-          (
-            realtimeData.receiveSpeedBps /
-            1000 /
-            1000
-          ).toPrecision(3)
-        }}Mbps download
+      <p class="subtitle">
+        <font-awesome-icon icon="arrow-down" />
+        {{ (realtimeData.receiveSpeedBps / 1000 / 1000).toPrecision(3) }} Mbps
       </p>
-      <p>
-        {{
-          (
-            realtimeData.transmitSpeedBps /
-            1000 /
-            1000
-          ).toPrecision(3)
-        }}Mbps upload
+      <p class="subtitle">
+        <font-awesome-icon icon="arrow-up" />
+        {{ (realtimeData.transmitSpeedBps / 1000 / 1000).toPrecision(3) }} Mbps
       </p>
       <apexchart
         ref="chart"
@@ -88,10 +78,10 @@ export default {
           },
           animations: {
             enabled: true,
-            easing: 'linear',
+            easing: "linear",
             dynamicAnimation: {
-              speed: 1000
-            }
+              speed: 1000,
+            },
           },
         },
         xaxis: {
@@ -105,19 +95,19 @@ export default {
           },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         grid: {
           padding: {
             left: 0,
-            right: 0
-          }
+            right: 0,
+          },
         },
         markers: {
           size: 0,
           hover: {
-            size: 0
-          }
+            size: 0,
+          },
         },
       },
       series: [
@@ -128,22 +118,19 @@ export default {
   },
   mounted() {
     this.intervalUpdate = setInterval(async () => {
-      this.updateChart()
-    }, 1000)
+      this.updateChart();
+    }, 1000);
   },
   beforeDestroy() {
-    if (this.intervalUpdate)
-      clearInterval(this.intervalUpdate)
+    if (this.intervalUpdate) clearInterval(this.intervalUpdate);
   },
   computed: {
     realtimeData() {
-      const empty = { transmitSpeedBps: 0, receiveSpeedBps: 0 }
-      if (!this.$store.state.realtimeMetrics)
-        return empty;
-      if (!this.$store.state.realtimeMetrics.groupTraffic)
-        return empty
+      const empty = { transmitSpeedBps: 0, receiveSpeedBps: 0 };
+      if (!this.$store.state.realtimeMetrics) return empty;
+      if (!this.$store.state.realtimeMetrics.groupTraffic) return empty;
       return this.$store.state.realtimeMetrics.groupTraffic;
-    }
+    },
   },
   methods: {
     updateChart() {
@@ -152,12 +139,15 @@ export default {
       Object.entries(groupTraffic).forEach(([k, v]) => {
         const found = this.series.find((n) => n.name == k);
         if (found) {
-          found.data.push([currentTime, Number((v / 1000 / 1000).toPrecision(3))]);
+          found.data.push([
+            currentTime,
+            Number((v / 1000 / 1000).toPrecision(3)),
+          ]);
         }
       });
-      this.$refs.chart.updateSeries(this.series)
+      this.$refs.chart.updateSeries(this.series);
       // TODO remove old data (to prevent memory leaking)
-    }
-  }
+    },
+  },
 };
 </script>

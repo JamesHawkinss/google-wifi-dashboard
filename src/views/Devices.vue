@@ -7,7 +7,6 @@
     <div
       v-for="device in sortedDevices"
       :key="device.id"
-      v-else
     >
       <device-row :device="device" />
     </div>

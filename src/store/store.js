@@ -11,6 +11,7 @@ export function createStore() {
             devices: [],
             speedTestResults: {},
             realtimeMetrics: {},
+            insightCards: [],
             privateSsid: 'loading'
         },
         mutations: {
@@ -37,6 +38,9 @@ export function createStore() {
             },
             setRealtimeMetrics(state, payload) {
                 state.realtimeMetrics = payload
+            },
+            setInsightCards(state, payload) {
+                state.insightCards = payload
             }
         },
         actions: {
@@ -72,6 +76,10 @@ export function createStore() {
                 setInterval(async () => {
                     await context.dispatch('setRealtimeMetrics');
                 }, 5000)
+            },
+            async setInsightCards(context) {
+                const cards = (await getGoogleWifiApi().getGroupInsightCards(context.state.group.id)).insightsCards;
+                context.commit('setInsightCards', cards);
             }
         }
     })

@@ -26,6 +26,12 @@
       />
     </div>
 
+    <div v-for="card in $store.state.insightCards" :key="card.id">
+      <div v-if="card.category != 'INFO'">
+        <insight-card :card="card" />
+      </div>
+    </div>
+
     <network-card />
     <devices-card />
   </div>
@@ -58,6 +64,7 @@ p {
 import IconBubble from "@/components/core/IconBubble.vue";
 import NetworkCard from "@/components/core/NetworkCard.vue";
 import DevicesCard from "../components/core/DevicesCard.vue";
+import InsightCard from "@/components/core/InsightCard.vue";
 
 export default {
   data() {
@@ -75,6 +82,7 @@ export default {
     IconBubble,
     NetworkCard,
     DevicesCard,
+    InsightCard
   },
 };
 </script>

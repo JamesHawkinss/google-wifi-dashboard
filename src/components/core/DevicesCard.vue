@@ -25,6 +25,7 @@
   border-radius: 0.5rem;
   margin: 0 auto;
   max-width: 40rem;
+  margin-bottom: 2rem;
 }
 
 .icon {
@@ -61,7 +62,7 @@ export default {
     sortedDevices() {
       return this.$store.state.devices.sort((a, b) => {
         return !!b.connected - !!a.connected;
-      });
+      }).filter((e) => e.friendlyName !== 'Unnamed device');
     },
   },
 };
