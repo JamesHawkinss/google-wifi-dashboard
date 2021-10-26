@@ -1,19 +1,13 @@
 # google-wifi-dashboard
+A dashboard for Google Wi-Fi, using the google-wifi-api-node wrapper.
 
-## Project setup
-```
-npm install
-```
+Check it out here: (wifi.squeezebox.dev)[https://wifi.squeezebox.dev]
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Requirements
+You're going to need a refresh token to use this dashboard. Click (here)[https://www.angelod.com/onhubauthtool/] to get one.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Installation
+1. `git clone https://github.com/JamesHawkinss/google-wifi-dashboard`
+2. `cd google-wifi-dashboard`
+3. `npm install`
+4. `npm run serve` or `npm run build`

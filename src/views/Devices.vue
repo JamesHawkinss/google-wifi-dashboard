@@ -1,7 +1,14 @@
 <template>
   <div class="network">
     <navigation to="/" text="GO HOME" />
-    <div v-for="device in $store.state.devices.sort(sortingFunction)" :key="device.id">
+    <div v-if="$store.state.devices.length == 0">
+      <p>loading devices</p>
+    </div>
+    <div
+      v-for="device in sortedDevices"
+      :key="device.id"
+      v-else
+    >
       <device-row :device="device" />
     </div>
   </div>
@@ -22,16 +29,12 @@ export default {
     Navigation,
     DeviceRow,
   },
-  methods: {
-    sortingFunction(a, b) {
-      if (a.connected && !b.connected) {
-        return -1;
-      } else if (!a.connected && b.connected) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-  }
+  computed: {
+    sortedDevices() {
+      return this.$store.state.devices.sort((a, b) => {
+        return !!b.connected - !!a.connected;
+      });
+    },
+  },
 };
 </script>

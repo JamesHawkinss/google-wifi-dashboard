@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 import VueApexCharts from 'vue-apexcharts'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faGlobe, faNetworkWired, faLaptop, faWifi, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faNetworkWired, faLaptop, faWifi, faArrowLeft, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import { createStore } from '@/store/store'
@@ -21,7 +21,9 @@ library.add([
   faNetworkWired,
   faLaptop,
   faWifi,
-  faArrowLeft
+  faArrowLeft,
+  faArrowUp,
+  faArrowDown
 ])
 
 Vue.use(Vuex)
