@@ -1,10 +1,10 @@
 # google-wifi-dashboard
 A dashboard for Google Wi-Fi, using the google-wifi-api-node wrapper.
 
-Check it out here: (wifi.squeezebox.dev)[https://wifi.squeezebox.dev]
+Check it out here: [wifi.squeezebox.dev](https://wifi.squeezebox.dev)
 
 ### Requirements
-You're going to need a refresh token to use this dashboard. Click (here)[https://www.angelod.com/onhubauthtool/] to get one.
+You're going to need a refresh token to use this dashboard. Click [here](https://www.angelod.com/onhubauthtool/) to get one.
 
 ### Installation
 1. `git clone https://github.com/JamesHawkinss/google-wifi-dashboard`
