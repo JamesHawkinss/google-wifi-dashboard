@@ -11,5 +11,5 @@ jobs:
       with:
         username: 'JamesHawkinss'
         reponame: 'google-wifi-dashboard'
-        token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
-        cname: 'wifi.squeezebox.dev'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        cname: 'wifi.jameshawkins.dev'
